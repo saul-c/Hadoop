@@ -39,3 +39,25 @@ export JAVA_HOME=jdk安装目录 export JRE_HOME=$JAVA_HOME/jre export CLASSPATH
 $ source /etc/profile
 
 3、配置hadoop；
+
+Hadoop配置
+1，下载Hadoop安装包 
+地址：http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+
+$ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+
+2、解压到指定目录下；
+$ mv 文件 /opt
+解压
+$ tar -zxvf hadoop-1.2.1.tar.gz
+
+3、配置hadoop-env.sh、core-site.xml、hdfs-site.xml、mapred-site.xml四个文件；
+进入conf下 $ cd conf/
+$ vim hadoop-env.sh 打开 配置Javahome
+配置<configuration>
+
+4、编辑/etc/profile文件，配置hadoop相关的环境变量；
+5、第一次使用hadoop先进行格式化：
+$ hadoop namenode -format；
+6、启动hadoop:start-all.sh；
+7、检查进程：jps；
