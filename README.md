@@ -61,3 +61,40 @@ $ vim hadoop-env.sh 打开 配置Javahome
 $ hadoop namenode -format；
 6、启动hadoop:start-all.sh；
 7、检查进程：jps；
+
+HDFS系统
+
+HDFS设计架构
+1，块（block）:
+HDFS的文件被分为块进行存储（默认65MB），块是文件存储处理的逻辑单元。
+2，NameNode（管理节点）
+存放的元数据
+1，文件与数据快的映射表
+2，数据快与数据节点的映射表
+
+3，DateNode（工作节点）
+存放数据块
+就是真正的数据
+
+MapReduce框架
+每台机架上有多个数据块节点，每个节点数据块有三个副本备份，至少有一个备份副本分配到别的机架上，这样做为了每个节点会发生故障，保证数据容错，数据的丢失，有些许数据冗余，避免挂机了数据丢失。
+
+心跳检测，同步做备份，一旦发生故障，备份就会替换。
+
+HDFS 的特点：
+1）数据冗余，硬件容错
+2）流水线式的数据访问
+3）存储大文件	
+4）适用性和局限性：
+适合数据批量读写，吞吐量高
+不适合交互式应用，低延迟很难需求满足
+适合一次读写多次读取，顺序读写
+不支持多用户并发写相同的文件
+
+HDFS使用：它提供了 shell 接口，可以用Linux命令行操作
+hadoop namenode -format #格式化namenode
+hadoop fs -ls / #打印目录文件列表
+hadoop fs -mkdir input #创建目录
+hadoop fs -put hadoop-env.sh input/ #上传文件
+hadoop fs -get input/abc.sh hadoop-envcomp.sh #下载文件
+hadoop dfsadmin -report #dfs报告
